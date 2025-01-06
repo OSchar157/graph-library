@@ -5,6 +5,7 @@
 
 #include "vertex.h"
 #include "neighbor.h"
+#include "../graph_algs/graph_algs.h"
 
 template <typename T>
 class Graph
@@ -24,13 +25,6 @@ public:
         graph_vector.push_back(new_vert);
         vertex_count++;
         return new_vert;
-    }
-
-    void addVertex(Vertex<T>* new_vert)
-    {
-        if(includes(new_vert)) return;
-        
-        graph_vector.push_back(new_vert);
     }
 
     void addEdge(Vertex<T>* from_vert, Vertex<T>* to_vert, float weight)
@@ -61,11 +55,21 @@ public:
     void removeAllEdges(Vertex<T>* tail_vert, Vertex<T>* head_vert);
     */
 
+   friend class GraphAlgorithms<T>;
+
 private:
     std::vector<Vertex<T> *> graph_vector; //self describing edges
     bool has_neg_weights;
     size_t edge_count;
     size_t vertex_count;
+
+    // for use with the algorithms class
+    void addVertex(Vertex<T>* new_vert)
+    {
+        if(includes(new_vert)) return;
+        
+        graph_vector.push_back(new_vert);
+    }
 };
 
 #endif

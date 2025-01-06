@@ -1,3 +1,4 @@
 .vscode/
 Makefile
 test
+graph/edge.h

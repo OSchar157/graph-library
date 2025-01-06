@@ -24,7 +24,7 @@ int main()
 
     cout << endl;
 
-    Graph<int> dfs_result = DFS(graph, vert1);
+    Graph<int> dfs_result = GraphAlgorithms<int>::DFS(graph, vert1);
 
     for(Vertex<int>* vert : dfs_result.getVertices())
     {
