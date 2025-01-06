@@ -11,18 +11,18 @@ template <typename T>
 class Graph
 {
 public:
-    Graph() : graph_vector(std::vector<Vertex<T> *>()), has_neg_weights(false), edge_count(0), vertex_count(0) {}
+    Graph() : graph_set(std::unordered_set<Vertex<T> *>()), has_neg_weights(false), edge_count(0), vertex_count(0) {}
 
     size_t getEdgeCount() { return edge_count; }
     size_t getVertexCount() { return vertex_count; }
     bool hasNegWeights() { return has_neg_weights; }
 
-    std::vector<Vertex<T> *> getVertices() { return graph_vector; }
+    std::unordered_set<Vertex<T> *> getVertices() { return graph_set; }
 
     Vertex<T>* addVertex(T value)
     {
         Vertex<T>* new_vert = new Vertex<T>(value);
-        graph_vector.push_back(new_vert);
+        graph_set.insert(new_vert);
         vertex_count++;
         return new_vert;
     }
@@ -35,7 +35,7 @@ public:
             has_neg_weights = true;
         }
 
-        // add the edge to the vector of neighbors
+        // add the edge to the set of neighbors
         Neighbor<T>* new_neighbor = new Neighbor<T>(to_vert, weight);
         from_vert->addNeighbor(new_neighbor);
         edge_count++;
@@ -43,22 +43,21 @@ public:
 
     bool includes(Vertex<T>* vert)
     {
-        return std::find(graph_vector.begin(), graph_vector.end(), vert) != graph_vector.end();
+        return graph_set.count(vert) == 1 ? true : false;
     }
 
     /*
     TO BE IMPLEMENTED
 
-    std::vector<Vertex<T>* > getVertices();
+    std::unordered_set<Vertex<T>* > getVertices();
     void removeVertex(Vertex<T>* vert_to_rm);
-    void removeEdge(Vertex<T>* tail_vert, Vertex<T>* head_vert, float weight);
     void removeAllEdges(Vertex<T>* tail_vert, Vertex<T>* head_vert);
     */
 
    friend class GraphAlgorithms<T>;
 
 private:
-    std::vector<Vertex<T> *> graph_vector; //self describing edges
+    std::unordered_set<Vertex<T> *> graph_set; //self describing edges
     bool has_neg_weights;
     size_t edge_count;
     size_t vertex_count;
@@ -68,7 +67,7 @@ private:
     {
         if(includes(new_vert)) return;
         
-        graph_vector.push_back(new_vert);
+        graph_set.insert(new_vert);
     }
 };
 

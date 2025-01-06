@@ -1,7 +1,7 @@
 #ifndef VERTEX_H
 #define VERTEX_H
 
-#include <vector>
+#include <unordered_set>
 
 // Forward declaration of Graph
 template <typename T>
@@ -17,16 +17,17 @@ class Vertex
 public:
     T get_value() { return value; }
     void update_value(T new_val) { value = new_val; }
-    std::vector<Neighbor<T>* > getNeighbors() { return neighbors; }
+    std::unordered_set<Neighbor<T>* > getNeighbors() { return neighbors; }
+    void removeNeighbor(Neighbor<T>* neighbor) { neighbors.erase(neighbor); }
 
     friend class Graph<T>;
     
 private:
-    Vertex(T value) : value(value), neighbors(std::vector<Neighbor<T>* >()) {}
-    void addNeighbor(Neighbor<T>* neighbor) { neighbors.push_back(neighbor); }
+    Vertex(T value) : value(value), neighbors(std::unordered_set<Neighbor<T>* >()) {}
+    void addNeighbor(Neighbor<T>* neighbor) { neighbors.insert(neighbor); }
     
     T value;
-    std::vector<Neighbor<T>* > neighbors;
+    std::unordered_set<Neighbor<T>* > neighbors;
 };
 
 #include "neighbor.h"
