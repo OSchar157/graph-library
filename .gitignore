@@ -1,5 +1,3 @@
 .vscode/
-graph/test
-graph/main.cpp
 Makefile
-graph_algs.cpp
+test
