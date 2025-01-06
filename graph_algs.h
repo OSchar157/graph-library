@@ -1,4 +1,4 @@
-#include "graph.h"
+#include "graph/graph.h"
 
 template <typename T>
 Graph<T> DFS(Graph<T> graph, Vertex<T> *start);
