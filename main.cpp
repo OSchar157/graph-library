@@ -14,6 +14,7 @@ int main()
     Vertex<int>* vert5 = graph.addVertex(5);
 
     graph.addEdge(vert1, vert3, 2);
+    graph.addEdge(vert3, vert1, 2);
     graph.addEdge(vert3, vert4, 5);
     graph.addEdge(vert4, vert5, 1);
 
@@ -30,4 +31,19 @@ int main()
     {
         cout << vert->get_value() << endl;
     }
+
+    cout << graph.getVertexCount() << endl;
+    cout << graph.getEdgeCount() << endl;
+    
+    graph.removeVertex(vert1);
+
+    for(Vertex<int>* vert : graph.getVertices())
+    {
+        cout << vert->get_value();
+    }
+    cout << endl;
+
+    cout << graph.getVertexCount() << endl;
+    cout << graph.getEdgeCount() << endl;
+    
 }

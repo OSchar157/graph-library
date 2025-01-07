@@ -11,8 +11,8 @@ template <typename T>
 class Neighbor
 {
 public:
-    Vertex<T>* getHead() { return head_vert; }
-    float getEdgeWeight() { return edge_weight; }
+    Vertex<T>* getHead() const { return head_vert; }
+    float getEdgeWeight() const { return edge_weight; }
     void updateWeight(float new_weight) { edge_weight = new_weight; }
     
     ~Neighbor() {}
